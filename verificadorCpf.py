@@ -1,29 +1,38 @@
-total1 = 0
-total2 = 0
-qt_dig1 = 10
-qt_dig2 = 11
-num = '222222222222'
-for i in num:
-    total1 = total1 + (int(i)*qt_dig1)
-    qt_dig1 = qt_dig1 - 1
+class ValidDocuments:
+    def cpf_isvalid(cpf):
+        soma = 0
+        contador = 10
+        cpfDigt = cpf[-2:]
+        cpf = cpf.replace(".","").replace("-","")[:-2]
+        numeros_invalid = [
+            '111111111','222222222','333333333','444444444','555555555','666666666','777777777','888888888','999999999',
+            '000000000']
 
+        if cpf not in numeros_invalid:
+            if len(cpf) == 9:
+                for i in cpf:
+                    soma +=(int(i) * contador)
+                    contador -= 1
 
-result1 = 11 - (total1 % 11)
-num = num+str(result1)
-print(num)
+                digit_one = 11 - (soma % 11)
+                cpf = cpf+str(digit_one)
+                contador = 11
+                soma = 0
 
-for i in num:
-    total2 = total2 + (int(i)*qt_dig2)
-    qt_dig2 = qt_dig2 - 1
+                for i in cpf:
+                    soma +=(int(i) * contador)
+                    contador -= 1
 
-result2 = 11 - (total2 % 11)
+                digit_two = 11 - (soma % 11)
+                digits = str(digit_one)+str(digit_two)
 
-print(f'primeiro digito: {result1}')
-print(f'segundo digito: {result2}')
+                if digits == cpfDigt:
+                    return f'Documento valido!'
+                else:
+                    return f'documento invalido'
 
-def Cpf_isvalid(cpf):
-    if len(cpf) == 11:
-       pass
+            else:
+                return f'cpf deve possuir 11 digitos'
+        else:
+            return f'Esses numeros, não são validos'
 
-    else:
-        return f'Cpf invalido, falta de digitos'

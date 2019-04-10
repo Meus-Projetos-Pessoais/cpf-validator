@@ -63,10 +63,3 @@ class ValidCpf:
         else:
             return f"It's not valid!"
 
-
-
-is_valid = ValidCpf()
-while True:
-    cpf = input()
-    print()
-    print(is_valid.cpf_isvalid(cpf))
